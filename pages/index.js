@@ -23,6 +23,16 @@ const handlePost= async ()=>{
         })
 }
 
+
+const handledelete= async (id)=>{
+  console.log("clicked",id);
+       await axios.delete(`/api/delete/?id=${id}`)
+        .then(res => {
+          console.log(res);
+        })
+}
+
+
   return (
     <div className="container">
       <Head>
@@ -34,6 +44,15 @@ const handlePost= async ()=>{
         
         <div>Main Section {user?.length}</div>
         <button onClick={handlePost}> Add</button>
+
+        {
+          user&& user.map(item=><div>
+              <h1>{item.name}</h1>
+              <h3>{item.email}</h3>
+              <button onClick={()=>handledelete(item._id)}> Delete</button>
+          </div>)
+        }
+       
       </main>
 
       <footer>
